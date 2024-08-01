@@ -10,6 +10,7 @@ There will be various libraries and APIs used in these scripts. Please see below
         1. Plotly 
         2. Seaborn
         3. Matplotlib
+        4. HTML Colour Codes
 
 ### Stock Data
         1. yFinance
