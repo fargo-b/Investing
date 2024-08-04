@@ -1,5 +1,6 @@
 # The Investing Repository
 The goal of this is to develop, test, and deploy Python scripts to use in trading and investing.
+Development, Refinement, and Testing will be done in Jupyter Notebook. 
 
 ## Sources and Libraries
 There will be various libraries and APIs used in these scripts. Please see below
@@ -10,8 +11,11 @@ There will be various libraries and APIs used in these scripts. Please see below
 3. Matplotlib
 4. HTML Colour Codes
 
-### Stock Data
+### Economic and Stock Data
 1. yFinance
+2. FRED
+3. Nasdaq Data Link
+4. OECD
 
 ### Numerical & Data Science
 1. NumPy
