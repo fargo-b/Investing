@@ -45,7 +45,7 @@ def sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
     return(expected_return (weights, log_returns) - risk_free_rate) / standard_deviation (weights, cov_matrix)
 
 # Get Risk Free Rate 
-fred = Fred(api_key='7e27c49a38c8efb2faf2047bfd871a0b')
+fred = Fred(api_key='Your API key')
 ten_year_treasury_rate = fred.get_series_latest_release('GS10') / 100
 
 risk_free_rate = ten_year_treasury_rate.iloc[-1]
