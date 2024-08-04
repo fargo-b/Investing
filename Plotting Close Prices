@@ -1,0 +1,25 @@
+# Plotting share price 'easy'
+import plotly.express as px
+import pandas as pd
+import yfinance as yf
+import datetime as dt
+
+# Date
+end = dt.datetime.now()
+start = dt.datetime(2000,1,1)
+
+# Stock list
+stocklist = 'BP.L'
+
+# Getting the data 
+data = yf.download(stocklist, start=start, end=end)
+
+# Grabbing the adj close price
+Close = data['Adj Close']
+
+# Plotting
+fig = px.line(data, y=Close)
+
+fig.update_layout(title=stocklist)
+
+fig.show()
