@@ -1,0 +1,79 @@
+# Get dependancies
+import numpy as np
+import datetime as dt
+import yfinance as yf
+import pandas as pd
+import plotly.offline as pyo
+from scipy.optimize import minimize 
+from fredapi import Fred
+from plotly.subplots import make_subplots
+pyo.init_notebook_mode(connected=True)
+
+# Define tickers and time range 
+stocklist = ['ULVR.L', 'BNZL.L', 'GSK.L', 'AZN.L', 'BDEV.L', 'KIE.L', 
+             'PSN.L', 'TW.L', 'TPK.L', 'BBY.L', 'RIO.L', 'ANTO.L', 
+             'AAL.L', 'HOC.L', 'SGE.L', 'CCC.L', 'BP.L', 'CNA.L', 'SSE.L']
+
+# Dates
+end_date = dt.datetime.now()
+start_date = dt.datetime(2000,1,1)
+
+# Grabbing data
+data = yf.download(stocklist, start=start_date, end=end_date)
+
+# Get Adjusted Close Price
+Close = data['Adj Close']
+
+# Get Log Normal returns
+log_returns = np.log(Close / Close.shift(1))
+log_returns = log_returns.dropna()
+
+# Making Covariance Matrix
+cov_matrix = log_returns.cov()*252
+
+# Calculating standard deviation
+def standard_deviation (weights, cov_matrix):
+    variance = weights.T @ cov_matrix @weights
+    return np.sqrt(variance)
+
+#  Expected returns
+def expected_return (weights, log_returns):
+    return np.sum(log_returns.mean()*weights)*(20*252)
+
+# Calculating Sharpe Ratio
+def sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
+    return(expected_return (weights, log_returns) - risk_free_rate) / standard_deviation (weights, cov_matrix)
+
+# Get Risk Free Rate 
+fred = Fred(api_key='7e27c49a38c8efb2faf2047bfd871a0b')
+ten_year_treasury_rate = fred.get_series_latest_release('GS10') / 100
+
+risk_free_rate = ten_year_treasury_rate.iloc[-1]
+
+# Define the function to minimize (negative Sharpe Ratio)
+def neg_sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
+    return -sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate)
+
+# Setting constraints and bounds 
+constraints = {'type': 'eq', 'fun': lambda weights: np.sum(weights)-1}
+bounds = [(0, 0.30) for _ in range(len(stocklist))]
+
+# Setting the initial equal weights
+initial_weights = np.array([1/len(stocklist)]*len(stocklist))
+
+# Optimising for max Sharpe Ratio
+optimised_results = minimize(neg_sharpe_ratio, initial_weights, args=(log_returns, cov_matrix, risk_free_rate), method= 'SLSQP', constraints=constraints, bounds=bounds)
+optimal_weights = optimised_results.x
+
+# Displaying the Optimal Portfolio
+print ("Optimal Weights:")
+for stocklist, weight in zip(stocklist, optimal_weights):
+    print(f"{stocklist}: {weight:.4f}")
+
+optimal_portfolio_return = expected_return(optimal_weights, log_returns)
+optimal_portfolio_volatility = standard_deviation(optimal_weights, cov_matrix)
+optimal_sharpe_ratio = sharpe_ratio(optimal_weights, log_returns, cov_matrix, risk_free_rate)
+
+print(f"Expected Annual Return: {optimal_portfolio_return:.4f}")
+print(f"Expected Volatility: {optimal_portfolio_volatility:.4f}")
+print(f"Sharpe Ratio: {optimal_sharpe_ratio:.4f}")
