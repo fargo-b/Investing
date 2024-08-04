@@ -1,0 +1,74 @@
+## News Aggregator with search function
+
+import requests
+import pandas as pd
+from IPython.display import display
+
+# API Keys
+NEWSDATA_API_KEY = 'Your key here'
+NEWSAPI_API_KEY = 'Your key here'
+MARKETAUX_API_KEY = 'Your key here'
+ALPHAVANTAGE_API_KEY = 'Your key here'
+
+# Fetch data
+def fetch_newsdata():
+    url = f'https://newsdata.io/api/1/news?apikey={NEWSDATA_API_KEY}&language=en&category=business,finance,economy&limit=20'
+    response = requests.get(url)
+    return response.json().get('results', [])
+
+def fetch_newsapi():
+    url = f'https://newsapi.org/v2/top-headlines?apiKey={NEWSAPI_API_KEY}&language=en&category=business&pageSize=20'
+    response = requests.get(url)
+    return response.json().get('articles', [])
+
+def fetch_marketaux():
+    url = f'https://api.marketaux.com/v1/news/all?language=en'
+    headers = {'Authorization': f'Bearer {MARKETAUX_API_KEY}'}
+    response = requests.get(url, headers=headers)
+    return response.json().get('data', [])
+
+def fetch_alphavantage():
+    url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=financial_markets&apikey={ALPHAVANTAGE_API_KEY}&language=en&limit=50'
+    response = requests.get(url)
+    return response.json().get('data', [])
+
+# Fetch news articles
+newsdata_articles = fetch_newsdata()
+newsapi_articles = fetch_newsapi()
+marketaux_articles = fetch_marketaux()
+alphavantage_articles = fetch_alphavantage()
+
+# Ensure articles are lists
+if isinstance(newsdata_articles, dict):
+    newsdata_articles = newsdata_articles.get('results', [])
+elif isinstance(newsapi_articles, dict):
+    newsapi_articles = newsapi_articles.get('articles', [])
+elif isinstance(marketaux_articles, dict):
+    marketaux_articles = marketaux_articles.get('data', [])
+elif isinstance(alphavantage_articles, dict):
+    alphavantage_articles = alphavantage_articles.get('data', [])
+
+# Combine articles
+articles = newsdata_articles + newsapi_articles + marketaux_articles + alphavantage_articles
+
+# Normalize the data to ensure consistent structure
+for article in articles:
+    if 'link' not in article:
+        article['link'] = article.get('url', '')
+  
+# Create a DataFrame to display the articles
+df = pd.DataFrame(articles)
+
+# Setting the data frame
+df = df[['author', 'title']]
+df.columns = ['Author', 'Title']
+pd.set_option('display.max_colwidth', None)
+
+# Get user input for keyword search
+search_keyword = input("Enter a keyword or ticker:").lower()
+
+# Filter articles based on the keyword
+filtered_df = df[df['Title'].str.lower().str.contains(search_keyword)]
+
+# Display the filtered DataFrame
+display(filtered_df)
