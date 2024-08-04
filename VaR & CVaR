@@ -1,0 +1,55 @@
+import yfinance as yf
+import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
+from scipy.stats import norm
+
+# List of tickers
+tickers = ['FRCH.L', 'IIND.L', 'BBDS.L', 'BCOG.L', 'VWRL.L', 'IUSA.L', 'GLDW.L']
+
+# Fetch data
+data = yf.download(tickers, start="2023-01-01", end="2024-01-01")['Adj Close']
+
+# Calculate daily returns
+returns = data.pct_change().dropna()
+
+# Portfolio weights (example: equally weighted)
+weights = np.array([1/len(tickers)] * len(tickers))
+
+# Calculate portfolio returns
+portfolio_returns = returns.dot(weights)
+
+# Calculate mean and standard deviation of portfolio returns
+mean_return = portfolio_returns.mean()
+std_return = portfolio_returns.std()
+
+# Confidence level
+confidence_level = 0.95
+alpha = 1 - confidence_level
+
+# Calculate VaR using the parametric method
+VaR = norm.ppf(alpha, mean_return, std_return)
+
+# Calculate CVaR (also known as Expected Shortfall)
+CVaR = alpha**-1 * norm.pdf(norm.ppf(alpha)) * std_return - mean_return
+
+# Plotting the distribution of returns
+fig = go.Figure()
+
+# Histogram of returns
+fig.add_trace(go.Histogram(x=portfolio_returns, nbinsx=50, name='Returns', histnorm='probability'))
+
+# VaR line
+fig.add_trace(go.Scatter(x=[VaR, VaR], y=[0, 0.1], mode='lines', name='VaR', line=dict(color='red', dash='dash')))
+
+# CVaR line
+fig.add_trace(go.Scatter(x=[CVaR, CVaR], y=[0, 0.1], mode='lines', name='CVaR', line=dict(color='blue', dash='dash')))
+
+fig.update_layout(title='Portfolio Returns Distribution with VaR and CVaR',
+                  xaxis_title='Returns',
+                  yaxis_title='Probability')
+
+print(f"Parametric VaR at {confidence_level*100}% confidence level: {VaR:.2%}")
+print(f"Conditional VaR (CVaR) at {confidence_level*100}% confidence level: {CVaR:.2%}")
+
+fig.show()
