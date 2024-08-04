@@ -1,0 +1,42 @@
+import yfinance as yf
+import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
+from scipy.stats import norm
+
+# List of tickers
+tickers = ['FRCH.L', 'IIND.L', 'BBDS.L', 'BCOG.L', 'VWRL.L', 'IUSA.L', 'GLDW.L']
+
+# Fetch data for different periods
+data_2023 = yf.download(tickers, start="2023-01-01", end="2024-01-01")['Adj Close']
+data_pre_2023 = yf.download(tickers, start="2020-01-01", end="2023-01-01")['Adj Close']
+
+# Calculate daily log returns
+log_returns_2023 = np.log(data_2023 / data_2023.shift(1)).dropna()
+log_returns_pre_2023 = np.log(data_pre_2023 / data_pre_2023.shift(1)).dropna()
+
+# Portfolio weights (example: equally weighted)
+weights = np.array([1/len(tickers)] * len(tickers))
+
+# Calculate portfolio log returns
+portfolio_log_returns_2023 = log_returns_2023.dot(weights)
+portfolio_log_returns_pre_2023 = log_returns_pre_2023.dot(weights)
+
+# Plotting the distribution of log returns for different periods
+fig = go.Figure()
+
+# Histogram of log returns for 2023
+fig.add_trace(go.Histogram(x=portfolio_log_returns_2023, nbinsx=50, name='Log Returns 2023', histnorm='probability', opacity=0.75))
+
+# Histogram of log returns for pre-2023
+fig.add_trace(go.Histogram(x=portfolio_log_returns_pre_2023, nbinsx=50, name='Log Returns Pre-2023', histnorm='probability', opacity=0.75))
+
+fig.update_layout(title='Portfolio Log Returns Distribution for Different Periods',
+                  xaxis_title='Log Returns',
+                  yaxis_title='Probability',
+                  barmode='overlay')
+
+print(f"Parametric VaR at {confidence_level*100}% confidence level: {VaR:.2%}")
+print(f"Conditional VaR (CVaR) at {confidence_level*100}% confidence level: {CVaR:.2%}")
+
+fig.show()
