@@ -22,6 +22,8 @@ There will be various libraries and APIs used in these scripts. Please see below
 2. Pandas
 3. SciPy
 4. SQLAlchemy
+5. Riskfolio-lib
+6. PyPortfolioOpt
 
 ### APIs
 1. NewsAPI
