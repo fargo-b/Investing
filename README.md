@@ -1,6 +1,6 @@
 # The Investing Repository
 The goal of this is to develop, test, and deploy Python scripts to use in trading and investing.
-Development, Refinement, and Testing will be done in Jupyter Notebook. 
+Development and Refinement will be done in Jupyter Notebook. 
 
 ## Sources and Libraries
 There will be various libraries and APIs used in these scripts. Please see below
