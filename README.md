@@ -34,8 +34,9 @@ There will be various libraries and APIs used in these scripts. Please see below
 5. Alpha Vantage 
 6. Nasdaq Data Link
 
-
-
+## Contents
+- Cheatsheet
+- News Aggregator
 
 
 This is for educational purposes only.
