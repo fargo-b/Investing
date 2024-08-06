@@ -36,7 +36,7 @@ There will be various libraries and APIs used in these scripts. Please see below
 
 ## Contents
 [Cheatsheet](https://github.com/fargo-b/Investing/blob/main/Cheatsheet)
-- News Aggregator
+[News Aggregator](https://github.com/fargo-b/Investing/blob/main/Tools/News%20Aggregator)
 
 
 This is for educational purposes only.
