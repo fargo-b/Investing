@@ -35,7 +35,7 @@ There will be various libraries and APIs used in these scripts. Please see below
 6. Nasdaq Data Link
 
 ## Contents
-- Cheatsheet
+[a relative link](cheatsheet.md)
 - News Aggregator
 
 
