@@ -39,7 +39,7 @@ Various libraries, APIs, and other useful tools
 7. Interactive Brokers
 
 ### Brokers
-1, Interactive Brokers
+1. Interactive Brokers
 
 ## Contents
 - [Cheatsheet](https://github.com/fargo-b/Investing/blob/main/Cheatsheet)
