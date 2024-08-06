@@ -1,9 +1,12 @@
 # The Investing Repository
 The goal of this is to develop, test, and deploy Python scripts to use in trading and investing.
+
 Development and Refinement will be done in Jupyter Notebook and then posted here. 
 
-## Sources and Libraries
-There will be various libraries and APIs used in these scripts. Please see below
+All software, libraries, data, etc. that is used in this repository will be free or open source. 
+
+## Libraries, APIs, Etc.
+Various libraries, APIs, and other useful tools
 
 ### Graphs and Data Visualisation
 1. Plotly 
