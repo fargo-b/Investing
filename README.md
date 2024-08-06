@@ -35,7 +35,7 @@ There will be various libraries and APIs used in these scripts. Please see below
 6. Nasdaq Data Link
 
 ## Contents
-[a relative link](cheatsheet.md)
+[Cheatsheet](https://github.com/fargo-b/Investing/blob/main/Cheatsheet)
 - News Aggregator
 
 
