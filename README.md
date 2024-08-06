@@ -37,7 +37,7 @@ There will be various libraries and APIs used in these scripts. Please see below
 ## Contents
 - [Cheatsheet](https://github.com/fargo-b/Investing/blob/main/Cheatsheet)
 - [News Aggregator](https://github.com/fargo-b/Investing/blob/main/Tools/News%20Aggregator)
-- [VaR & CVaR](https://github.com/fargo-b/Investing/blob/main/Tools/VaR%&%CVaR)
+- [VaR & CVaR](https://github.com/fargo-b/Investing/blob/main/Tools/VaR%20%26%20CVaR)
 
 
 This is for educational purposes only.
