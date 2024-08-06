@@ -36,6 +36,10 @@ Various libraries, APIs, and other useful tools
 4. FRED 
 5. Alpha Vantage 
 6. Nasdaq Data Link
+7. Interactive Brokers
+
+### Brokers
+1, Interactive Brokers
 
 ## Contents
 - [Cheatsheet](https://github.com/fargo-b/Investing/blob/main/Cheatsheet)
