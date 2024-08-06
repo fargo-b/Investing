@@ -38,6 +38,10 @@ There will be various libraries and APIs used in these scripts. Please see below
 - [Cheatsheet](https://github.com/fargo-b/Investing/blob/main/Cheatsheet)
 - [News Aggregator](https://github.com/fargo-b/Investing/blob/main/Tools/News%20Aggregator)
 - [VaR & CVaR](https://github.com/fargo-b/Investing/blob/main/Tools/VaR%20%26%20CVaR)
+- [Close Prices](https://github.com/fargo-b/Investing/blob/main/Tools/Plotting%20Close%20Prices)
+- [Log VaR and CVaR](https://github.com/fargo-b/Investing/blob/main/Tools/Log%20VaR%20and%20CVaR)
+- [Covariance Heatmap](https://github.com/fargo-b/Investing/blob/main/Tools/Covariance%20Heatmap)
+- [Portfolio Optimisation](https://github.com/fargo-b/Investing/blob/main/Tools/Basic%20Portfolio%20Optimisation)
 
 
 This is for educational purposes only.
