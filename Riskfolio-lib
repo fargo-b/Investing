@@ -1,1 +1,30 @@
 # Exploring Riskfolio-lib and its uses
+
+## Mean-Variance Optimisation / Max Sharpe Ratio
+
+import numpy as np
+import pandas as pd
+import yfinance as yf
+import warnings
+import riskfolio as rp
+
+warnings.filterwarnings("ignore")
+pd.options.display.float_format = '{:.4%}'.format
+
+# Date range
+start = '2019-01-01'
+end = '2024-08-06'
+
+# Tickers of assets
+assets = ['FRCH.L', 'IIND.L', 'BBDS.L', 'BCOG.L', 'VWRL.L', 'IUSA.L', 'GLDW.L', 'SGLO.L']
+assets.sort()
+
+
+# Downloading data
+data = yf.download(assets, start = start, end = end)
+data = data.loc[:,('Adj Close', slice(None))]
+data.columns = assets
+
+# Asset returns
+Y = data[assets].pct_change().dropna()
+Y.tail()
