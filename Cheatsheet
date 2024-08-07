@@ -1,3 +1,23 @@
 # This file will be used as a copy-and-paste cheatsheet, storing commonly used snippets of code to refer back to. 
 
 # Dependancies
+import numpy as np
+import datetime as dt
+import yfinance as yf
+import pandas as pd
+import requests
+
+## Plotly 
+import plotly.express as px
+import plotly.graph_objects as go
+import plotly.offline as pyo
+from plotly.subplots import make_subplots ## for pyo
+pyo.init_notebook_mode(connected=True) ## for pyo
+
+## yFinance stock data
+stocklist = ['RIO.L', 'ULVR.L', 'BNZL.L', 'GSK.L'] 
+end_date = dt.datetime.now()
+start_date = dt.datetime(2000,1,1)
+data = yf.download(stocklist, start=start_date, end=end_date)
+Close = data['Adj Close']
+
