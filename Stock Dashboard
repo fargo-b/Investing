@@ -1,1 +1,46 @@
+import datetime as dt
+import numpy as np
+import pandas as pd
+import yfinance as yf
+import scipy as sp
+import riskfolio as rf
+import plotly as py
+import plotly.graph_objects as go
 
+def get_company_info(ticker_symbol):
+    try:
+        # Create a Ticker object for the specified company
+        company = yf.Ticker(ticker_symbol)
+
+        # Retrieve company info (including bio)
+        company_info = company.info["longBusinessSummary"]
+        return company_info
+    except Exception as e:
+        return f"Error fetching data: {str(e)}"
+
+def get_recent_news(ticker_symbol):
+    try:
+        # Fetch recent news using Yahoo Finance API or other sources
+        news = yf.Ticker(ticker_symbol).news
+        
+        news_df = pd.DataFrame(news)
+        news_df = news_df[['title', 'link']]
+        news_df.columns = ['Title', 'Link']
+        pd.set_option('display.max_colwidth', None)
+        return news_df
+        
+        
+    except Exception as e:
+        return f"Error fetching news: {str(e)}"
+
+if __name__ == "__main__":
+    user_ticker = input("Ticker symbol: ")
+
+    # Fetch company info
+    result = get_company_info(user_ticker)
+    print(result)
+
+    # Fetch recent news
+    news_result = get_recent_news(user_ticker)
+    print(news_result)
+    
