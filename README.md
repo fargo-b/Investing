@@ -41,6 +41,9 @@ Various libraries, APIs, and other useful tools
 ### Brokers
 1. Interactive Brokers
 
+### Algo Trading
+1. Quant Connect
+
 ## Contents
 - [Cheatsheet](https://github.com/fargo-b/Investing/blob/main/Cheatsheet)
 - [News Aggregator](https://github.com/fargo-b/Investing/blob/main/Tools/News%20Aggregator)
