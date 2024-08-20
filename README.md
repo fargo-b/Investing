@@ -32,6 +32,15 @@ Various libraries, APIs, and other useful tools
 4. SQLAlchemy
 5. Riskfolio-lib
 6. PyPortfolioOpt
+7. Beautiful Soup
+
+### ML, DL, and everything in between
+1. Sk-Learn
+2. TensorFlow
+3. Keras
+4. Theano
+5. NLTK
+6. PyTorch
 
 ### APIs
 1. NewsAPI
