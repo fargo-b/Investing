@@ -9,10 +9,11 @@ All software, libraries, data, etc. that is used in this repository is free or o
 Various libraries, APIs, and other useful tools
 
 ### Graphs and Data Visualisation
-1. Plotly 
-2. Seaborn
-3. Matplotlib
-4. HTML Colour Codes
+1. Plotly
+2. Dash
+3. Seaborn
+4. Matplotlib
+5. HTML Colour Codes
 
 ### Economic and Stock Data
 1. yFinance
@@ -20,6 +21,9 @@ Various libraries, APIs, and other useful tools
 3. Nasdaq Data Link
 4. OECD
 5. Alpha Vantage
+6. Intinio
+7. World Bank
+8. Fama/French Data Library
 
 ### Numerical & Data Science
 1. NumPy
@@ -36,7 +40,8 @@ Various libraries, APIs, and other useful tools
 4. FRED 
 5. Alpha Vantage 
 6. Nasdaq Data Link
-7. Interactive Brokers
+7. Intrinio
+8. Interactive Brokers
 
 ### Brokers
 1. Interactive Brokers
